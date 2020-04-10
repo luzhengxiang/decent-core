@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理系统 </title>
+    <link href="/easyui/easyui.css" rel="stylesheet"/>
+    <link href="/easyui/icon.css" rel="stylesheet"/>
+    <link href="/easyui/skin-red.css" rel="stylesheet"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script src="/easyui/jquery.min.js"></script>
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    <script src="/easyui/local/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<div id="toolbar">
+    <div class="search-wapper">
+        <form class="query">
+            <span>用户名</span>
+            <input id="query_name" class="easyui-textbox"/>
+
+            <span>土地状态</span>
+            <select id="query_status" class="easyui-combobox" style="width:100px;">
+                <option value="-1">全部</option>
+                <option value="0">生长中</option>
+                <option value="1">已枯萎</option>
+            </select>
+            <input class="btn-search" type="button" value="查询" onclick="dg.query('#dg_data',['name','status,1'])"/>
+        </form>
+    </div>
+    <div class="action-wapper">
+    </div>
+</div>
+<table id="dg_data" toolbar="#toolbar" class="easyui-datagrid" fit="true" url="/admin/userLand/list"
+       pagination="true" emptyMsg="暂无数据" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="ck" checkbox="true"></th>
+        <th field="id" width="80">ID</th>
+        <th field="landTypeName" width="100">土地名称</th>
+        <th field="landNo" width="100">土地编号</th>
+        <th field="userName" width="100">用户名</th>
+        <th field="amount" width="80">开垦金额</th>
+        <th field="growRete" width="80">成长率</th>
+        <th field="totalCount" width="80">总收获数</th>
+        <th field="count" width="80">已收获数</th>
+        <th field="isDel" formatter="formatter.landStatus" width="80">土地状态</th>
+        <th field="wateringTime" formatter="formatter.time2" width="150">最近浇水</th>
+        <th field="fertilizerTime" formatter="formatter.time2" width="150">最近施肥</th>
+        <th field="addTime" formatter="formatter.time2" width="150">创建时间</th>
+    </tr>
+    </thead>
+</table>
+<!--收款信息-->
+<div id="dlg" class="easyui-dialog" title="收款信息" style="width:450px;height:320px;padding:10px" buttons="#frmTb"
+     closed="true" modal="true">
+</div>
+<div id="frmTb">
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="dlg.close('#dlg')">关闭</a>
+</div>
+<script src="/js/layer/layer.js"></script>
+<script src="/js/base.js"></script>
+</body>
+</html>

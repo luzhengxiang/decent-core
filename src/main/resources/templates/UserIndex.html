@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理系统 </title>
+    <link href="/easyui/easyui.css" rel="stylesheet"/>
+    <link href="/easyui/icon.css" rel="stylesheet"/>
+    <link href="/easyui/skin-red.css" rel="stylesheet"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script src="/easyui/jquery.min.js"></script>
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    <script src="/easyui/local/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<div id="toolbar">
+    <div class="search-wapper">
+        <form class="query">
+            <span>用户名</span>
+            <input id="query_name" class="easyui-textbox"  style="width:100px;"/>
+
+            <span>用户类型</span>
+            <select id="query_userType" class="easyui-combobox" style="width:80px;">
+                <option value="-1">全部</option>
+                <option value="0">普通用户</option>
+                <option value="1">平台用户</option>
+            </select>
+
+            <span>用户级别</span>
+            <select id="query_userLevel" class="easyui-combobox" style="width:80px;">
+                <option value="-1">全部</option>
+                <option value="0">普通会员</option>
+                <option value="1">高级会员</option>
+                <option value="2">钻石会员</option>
+                <option value="3">皇冠会员</option>
+                <option value="4">金牌会员</option>
+            </select>
+
+            <span>认证状态</span>
+            <select id="query_identityState" class="easyui-combobox" style="width:80px;">
+                <option value="-1">全部</option>
+                <option value="0">未认证</option>
+                <option value="1">待审核</option>
+                <option value="2">认证成功</option>
+                <option value="3">认证失败</option>
+            </select>
+
+            <span>激活状态</span>
+            <select id="query_activationState" class="easyui-combobox" style="width:80px;">
+                <option value="-1">全部</option>
+                <option value="0">未激活</option>
+                <option value="1">已激活</option>
+            </select>
+
+            <span>锁定状态</span>
+            <select id="query_locking" class="easyui-combobox" style="width:80px;">
+                <option value="-1">全部</option>
+                <option value="0">正常</option>
+                <option value="1">暂时锁定</option>
+                <option value="2">永久锁定</option>
+            </select>
+
+            <input class="btn-search" type="button" value="查询" onclick="dg.query('#dg_data',['name','userType,1','userLevel,1','identityState,1'
+            ,'activationState,1','locking,1'])"/>
+        </form>
+    </div>
+    <div class="action-wapper">
+
+        <a href="javascript:;" onclick="dg.edit('#dg_data', '#dlg2', '/admin/addUserView')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-plus"></i> 新增用户</a>
+        <a href="javascript:;" onclick="dg.edit('#dg_data', '#dlg2', '/admin/rechargeView')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-edit"></i> 充值</a>
+        <a href="javascript:;" onclick="dg.edit2('#dg_data', '#dlg2', '/admin/rechargeView2')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-edit"></i> 宠物充值</a>
+        <a href="javascript:;" onclick="dg.del('#dg_data', '/admin/User/activation','是否激活该用户？')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-unlock-alt"></i>激活</a>
+        <a href="javascript:;" onclick="dg.del('#dg_data', '/admin/User/Locking?Status=0','是否解锁该用户？')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-unlock-alt"></i> 解锁</a>
+        <a href="javascript:;" onclick="dg.del('#dg_data', '/admin/User/Locking?Status=2','锁定后无法登录系统，是否锁定该用户？')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-lock"></i> 锁定</a>
+        <a href="javascript:;" onclick="dg.edit('#dg_data', '#dlg', '/admin/UserReceiptInfo')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-file-o"></i> 查看账户信息</a>
+
+        <a href="javascript:;" onclick="dg.del('#dg_data', '/admin/User/identityState?Status=2','是否认证通过该用户？')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-check"></i> 认证通过</a>
+        <a href="javascript:;" onclick="dg.del('#dg_data', '/admin/User/identityState?Status=3','是否认证失败该用户？')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-close"></i> 认证失败 </a>
+
+    </div>
+</div>
+
+<table id="dg_data" toolbar="#toolbar" class="easyui-datagrid" fit="true" url="/admin/User/list"
+       pagination="true" emptyMsg="暂无数据">
+    <thead>
+    <tr>
+        <th field="ck" checkbox="true"></th>
+        <th field="id" width="60">ID</th>
+        <th field="userNo" width="100">用户编号</th>
+        <th field="userName" width="100">用户名</th>
+        <th field="recommendName"  width="100">推荐人</th>
+        <th field="userLevel" formatter="formatter.UserLevel" width="80">用户等级</th>
+        <th field="userType" formatter="formatter.UserType"   width="80">用户类型</th>
+        <th field="identityState" formatter="formatter.identityState"  width="80">认证状态</th>
+        <th field="amount" width="80">余额</th>
+        <th field="integral" width="80">积分</th>
+        <th field="creditScore" width="80">信誉分</th>
+        <th field="contractAmount" width="80">合约收益</th>
+        <th field="activationState" formatter="formatter.activationState" width="80">激活状态</th>
+        <th field="locking" formatter="formatter.Locking" width="150">锁定状态</th>
+        <th field="lockTime" formatter="formatter.time2" width="150">冻结时间</th>
+        <th field="addTime" formatter="formatter.time2" width="150">注册时间</th>
+    </tr>
+    </thead>
+</table>
+<!--收款信息-->
+<div id="dlg" class="easyui-dialog" title="账户信息" style="width:380px;height:450px;padding:10px" buttons="#frmTb"
+     closed="true" modal="true" shadow="false" >
+</div>
+<div id="frmTb">
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="dlg.close('#dlg')">关闭</a>
+</div>
+
+<!--新增弹框-->
+<div id="dlg2" class="easyui-dialog" title="用户管理" style="width:350px;height:500px;padding:10px" buttons="#frmTb2"
+     closed="true" modal="true" shadow="false">
+</div>
+<div id="frmTb2">
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="form.submit('#frm', '#dlg2', '#dg_data')">确定</a>
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="dlg.close('#dlg2')">取消</a>
+</div>
+
+<script src="/js/layer/layer.js"></script>
+<script src="/js/base.js"></script>
+</body>
+</html>

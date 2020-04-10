@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理系统 </title>
+    <link href="/easyui/easyui.css" rel="stylesheet"/>
+    <link href="/easyui/icon.css" rel="stylesheet"/>
+    <link href="/easyui/skin-red.css" rel="stylesheet"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script src="/easyui/jquery.min.js"></script>
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    <script src="/easyui/local/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<div class="easyui-panel" fit="true" style="padding:20px">
+    <form id="frm" action="/admin/WebConfig/edit" method="post" enctype="multipart/form-data"
+          xmlns:th="http://www.w3.org/1999/xhtml">
+
+        <!--<p class="d-title">预约时间设置</p>-->
+        <!--<div style="margin-bottom:15px">-->
+            <!--<label>预约开始时间：</label>-->
+            <!--<input name="mStart" class="easyui-timespinner" style="width:80px;" required th:value="${mStart}">-->
+            <!--<label style="margin-left:20px">预约结束时间：</label>-->
+            <!--<input name="mEnd" class="easyui-timespinner" style="width:80px;" required th:value="${mEnd}">-->
+        <!--</div>-->
+
+        <p class="d-title">升级条件设置</p>
+        <div style="margin-bottom:15px">
+            <label>普通会员：直推
+                <input class="easyui-numberspinner" name="upgrade0" th:value="${upgrade0}" label="" style="width:80px" data-options="increment:1,min:0,required:true"/>
+                人即可拿一代奖励，一代满足三三复制结构
+                <input class="easyui-numberspinner" name="upgrade1" th:value="${upgrade1}" label="" style="width:80px" data-options="increment:1,min:0,required:true"/>
+                人即可拿二代奖励，二代满足三三复制结构
+                <input class="easyui-numberspinner" name="upgrade2" th:value="${upgrade2}" label="" style="width:80px"  data-options="increment:1,min:0,required:true"/></label>
+                人复制结构即可拿三代推荐奖励
+        </div>
+
+        <div style="margin-bottom:15px">
+            <label>高级会员：推荐满足伞下复制结构三代
+                <input class="easyui-numberspinner" name="upgrade3" th:value="${upgrade3}" label="" style="width:80px" data-options="increment:1,min:0,required:true"/>
+                人，即可成为高级会员,拿三代奖励
+            </label>
+        </div>
+
+        <div style="margin-bottom:15px">
+            <label>钻石会员：满足高级会员之后直推人满
+                <input class="easyui-numberspinner" name="recommCount1" th:value="${recommCount1}" label="" style="width:80px"/>
+                人即为钻石会员,拿伞下10代百分比收益奖励
+            </label>
+        </div>
+
+        <div style="margin-bottom:15px">
+            <label>皇冠会员：满足高级会员后直推人满
+                <input class="easyui-numberspinner" name="recommCount2" th:value="${recommCount2}" label="" style="width:80px"/>
+                人，三代内会员满
+                <input class="easyui-numberspinner" name="teamCount1" th:value="${teamCount1}" label="" style="width:80px"/>
+                人即为皇冠会员，再拿伞下20代百分比收益奖励
+            </label>
+        </div>
+
+        <div style="margin-bottom:30px">
+            <label>金牌会员：高级会员后直推满
+                <input class="easyui-numberspinner" name="recommCount3" th:value="${recommCount3}" label="" style="width:80px"/>
+                人，三代内会员满
+                <input class="easyui-numberspinner" name="teamCount2" th:value="${teamCount2}" label="" style="width:80px"/>
+                人即为金牌会员，再拿无限代百分比收益奖励
+            </label>
+        </div>
+
+        <p class="d-title">推广收益设置</p>
+        <div style="margin-bottom:15px">
+            <label>1&nbsp代&nbsp收&nbsp益&nbsp可&nbsp拿&nbsp <input class="easyui-numberspinner" name="profitRate1" th:value="${profitRate1}" label="" style="width:80px"  data-options="increment:1,min:0,required:true,precision:2"/>&nbsp%，
+                &nbsp2&nbsp代&nbsp收&nbsp益&nbsp可&nbsp拿&nbsp&nbsp<input class="easyui-numberspinner" name="profitRate2" th:value="${profitRate2}" label="" style="width:80px"  data-options="increment:1,min:0,required:true,precision:2"/>&nbsp%，
+                &nbsp3&nbsp代&nbsp收&nbsp益&nbsp可&nbsp拿&nbsp&nbsp<input class="easyui-numberspinner" name="profitRate3" th:value="${profitRate3}" label="" style="width:80px"  data-options="increment:1,min:0,required:true,precision:2"/>&nbsp%
+                </label>
+        </div>
+
+        <div style="margin-bottom:30px">
+            <label>4-10代收益可拿&nbsp<input class="easyui-numberspinner" name="profitRate4" th:value="${profitRate4}" label="" style="width:80px"  data-options="increment:1,min:0,required:true,precision:2"/>&nbsp%，
+                11-20代收益可拿&nbsp<input class="easyui-numberspinner" name="profitRate5" th:value="${profitRate5}" label="" style="width:80px"  data-options="increment:1,min:0,required:true,precision:2"/>&nbsp%，
+                21代及以上收益可拿&nbsp<input class="easyui-numberspinner" name="profitRate6" th:value="${profitRate6}" label="" style="width:80px"  data-options="increment:1,min:0,required:true,precision:2"/>&nbsp%
+            </label>
+        </div>
+
+        <p class="d-title">交易设置</p>
+        <div style="margin-bottom:15px">
+            <label>币最低转让数</label>
+            <input class="easyui-textbox" name="orientMin" style="width:80px" required th:value="${orientMin}" />
+
+            <label class="ml-30">币转让手续费</label>
+            <input class="easyui-numberspinner" name="orient_fee" th:value="${orient_fee}" label="" style="width:80px"  data-options="increment:1,min:0,required:true,precision:2"/>&nbsp%
+
+            <label class="ml-30">收付款交易时长</label>
+            <input class="easyui-textbox" name="tradeTime" style="width:80px" required th:value="${tradeTime}" />
+
+        </div>
+
+        <p class="d-title">客服二维码设置</p>
+        <div style="margin-bottom:15px">
+            <label>客服二维码</label>
+            <img th:src="${customerServiceImg}" style="width:60px;margin-left:20px"/>
+            <label>如需修改，请在下方上传</label>
+        </div>
+        <div style="margin-bottom:30px">
+            <input type="hidden" name="img1" th:value="${customerServiceImg}"/>
+            <input class="easyui-filebox" name="newImg1" prompt="客服二维码" style="width:30%" buttonText="上传客服二维码"/>
+        </div>
+
+        <p class="d-title">其他设置</p>
+        <div style="margin-bottom:15px">
+            <label>
+                 实名认证赠送&nbsp<input class="easyui-numberspinner" name="authenticationGive" th:value="${authenticationGive}" label="" style="width:80px"  data-options="increment:1,min:0,required:true,precision:2"/>&nbsp&nbsp&nbsp
+                抽奖消耗&nbsp<input class="easyui-numberspinner" name="luckDrawConsume" th:value="${luckDrawConsume}" label="" style="width:80px"  data-options="increment:1,min:0,required:true,precision:2"/>&nbsp&nbsp&nbsp
+                解锁消耗&nbsp<input class="easyui-numberspinner" name="unlockAmount" th:value="${unlockAmount}" label="" style="width:80px"  data-options="increment:1,min:0,required:true,precision:2"/>&nbsp&nbsp&nbsp
+
+                宠物兑换&nbsp&nbsp<input name="isOpenExchangeStr" class="easyui-switchbutton" onText="开启" offText="关闭" th:checked="${isOpenExchange}"/>&nbsp&nbsp&nbsp
+                未售出收益&nbsp&nbsp<input name="notSellSwitchStr" class="easyui-switchbutton" onText="开启" offText="关闭" th:checked="${notSellSwitch}"/>&nbsp&nbsp&nbsp
+            </label>
+        </div>
+
+        <div style="margin-bottom:15px">
+            <label>
+                 抽奖规则&nbsp <input class="easyui-textbox" id="drawRules" name="drawRules" data-options="multiline:true,validType:'length[1,200]'"style="width: 500px;height: 100px" th:value="${drawRules}"/>
+            </label>
+        </div>
+
+        <div class="d-foot">
+            <a href="javascript:;" class="easyui-linkbutton" onclick="form.submit('#frm')"
+               style="width:80px;margin-right:2em">更新配置</a>
+            <a href="javascript:;" class="easyui-linkbutton" onclick="javascript: location.reload();"
+               style="width:80px;margin-right:2em">刷新</a>
+        </div>
+    </form>
+</div>
+<script src="/js/layer/layer.js"></script>
+<script src="/js/base.js"></script>
+</body>
+</html>

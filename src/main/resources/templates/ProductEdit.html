@@ -1,0 +1,110 @@
+<form style="text-align: center" id="frm" action="/admin/Product/Edit" method="post" enctype="multipart/form-data"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+    <input type="hidden" name="id" th:value="${id}"/>
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">宠物名称：</label>
+        <input class="easyui-textbox" name="name" style="width:193px" label="" required th:value="${name}" readonly="readonly"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">预约消耗：</label>
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true,precision:2"
+               name="bookingConsume" style="width:193px" label="" required th:value="${bookingConsume}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">积分条件：</label>
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true,precision:2"
+               name="greaterAmount" style="width:193px" label="" required th:value="${greaterAmount}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">积分兑换：</label>
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true,precision:2"
+               name="exchangeAmount" style="width:193px" label="" required th:value="${exchangeAmount}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">区块价格：</label>
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true,precision:2"
+               name="amount" style="width:193px" label="" required th:value="${amount}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">最大价格：</label>
+        <input class="easyui-numberspinner"  data-options="increment:1,min:0,required:true,precision:2"
+               name="maxAmount" style="width:193px" label="" required th:value="${maxAmount}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">宠物周期：</label>
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true"
+               name="durationCount" style="width:193px" label="" required th:value="${durationCount}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">合约收益：</label>
+        <input class="easyui-numberspinner"  data-options="increment:1,min:0,required:true,precision:2"
+               name="profit" style="width:193px" label="" required th:value="${profit}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">升级宠物：</label>
+          <input class="easyui-combobox" name="upgradeProductId" style="width:193px"
+                 label="" valueField="id" textField="name" url="/admin/Product/getProductList" th:value="${upgradeProductId}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">匹配开始：</label>
+        <input name="mStart" id="mStart"  class="easyui-timespinner" style="width:80px;"
+               required th:value="${mStart}" data-options = "min:'12:05',max:'21:55'">
+        <!--readonly="readonly" disabled="disabled"-->
+        <label>结束</label>
+        <input name="mEnd" id="mEnd" class="easyui-timespinner" style="width:80px;" th:value="${mEnd}"
+               required = "required" data-options = "min:'12:05',max:'21:55'">
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">匹配成功率：</label>
+        <input class="easyui-numberspinner"  data-options="increment:1,min:0,required:true,precision:2"
+               name="matchSuccessRate" style="width:193px" label="" required th:value="${matchSuccessRate}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">是否开放兑换：</label>
+        <input name="isOpenStr" class="easyui-switchbutton" onText="是" offText="否" th:checked="${isOpen}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label>宠物图片：</label>
+        <img th:src="${image}" style="width:60px;margin-left:20px"/>
+        <label>如需修改，请在下方上传</label>
+    </div>
+    <div style="margin-bottom:20px">
+        <input type="hidden" name="image" th:value="${image}"/>
+        <input class="easyui-filebox" name="newImg" prompt="宠物图片" style="width:76%" buttonText="上传图片"/>
+    </div>
+
+</form>
+
+<script type="text/javascript">
+
+    $(function () {
+        var bEndvalue = $("#bEndvalue").val();
+        $("#bEnd").timespinner({
+            min: '10:05',
+            max: '17:55',
+            value: bEndvalue,
+            required: true,
+            onSpinUp: function () {
+                var val = $("#bEnd").timespinner('getValue');
+                $("#mStart").timespinner('setValue', val);
+            },
+            onSpinDown: function () {
+                var val = $("#bEnd").timespinner('getValue');
+                $("#mStart").timespinner('setValue', val);
+            }
+        });
+    })
+
+</script>

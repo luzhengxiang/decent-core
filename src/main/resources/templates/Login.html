@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理系统 登录 </title>
+    <link href="/easyui/easyui.css" rel="stylesheet"/>
+    <link href="/easyui/icon.css" rel="stylesheet"/>
+    <link href="/easyui/skin-red.css" rel="stylesheet"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script src="/easyui/jquery.min.js"></script>
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    <script src="/easyui/local/easyui-lang-zh_CN.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+
+<div class="login-wrapper">
+    <form class="form" action="/admin/Admin/Login" method="post">
+        <h1>后台管理系统</h1>
+        <div style="margin-bottom:30px">
+            <input class="easyui-textbox" id="userName" name="userName" style="width:100%;height:32px;font-size:16px"
+                   data-options="label:'用户名:',required:true">
+        </div>
+        <div style="margin-bottom:30px">
+            <input class="easyui-passwordbox" id="pwd" name="pwd" style="width:100%;height:32px;font-size:16px"
+                   data-options="label:'密码:',required:true">
+        </div>
+        <div style="margin-bottom:30px">
+            <input class="easyui-textbox" id="code" name="code" style="width:70%;height:32px;font-size:16px"
+                   data-options="label:'验证码:',required:true">
+            <img src="/admin/Admin/LoginCode" alt="验证码" name="codeImg" style="float: right;margin-right: 2rem;"
+                 onclick="Code()"/>
+        </div>
+        <div style="text-align:center;margin-top:30px">
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="Login()"
+               style="width:120px;height:40px;background:#dd4b39;color:white;">登录</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="form.reset()"
+               style="width:120px;height:40px;background:#dd4b39;color:white;">重置</a>
+        </div>
+    </form>
+</div>
+
+<script src="/js/layer/layer.js"></script>
+<script src="/js/base.js"></script>
+<script type="text/javascript">
+    function Code() {
+        $('img[name=codeImg]').attr('src', '/admin/Admin/LoginCode?t=' + new Date().getTime());
+    }
+
+    function Login() {
+        var userName = $("#userName").val();
+        var pwd = $("#pwd").val();
+        var code = $("#code").val();
+
+        $.post('/admin/Admin/Login', {
+            UserName: userName,
+            Pwd: pwd,
+            Code: code
+        }, function (data) {
+            alert.toast(data.message);
+            if (data.success) {
+                setTimeout(function () {
+                    window.location.href = '/admin/home';
+                }, 1500);
+            }
+        })
+    }
+</script>
+
+</body>
+</html>

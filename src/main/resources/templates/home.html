@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width"/>
+    <title>后台管理系统 </title>
+    <link href="/easyui/easyui.css" rel="stylesheet"/>
+    <link href="/easyui/icon.css" rel="stylesheet"/>
+    <link href="/easyui/skin-red.css" rel="stylesheet"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+
+</head>
+<body class="easyui-layout">
+
+<div id="north" region="north" border="false" split="false" style="height:50px;padding:0;margin:0" xmlns:th="http://www.w3.org/1999/xhtml">
+    <table class="banner" style="border-spacing:0px;">
+        <tr>
+            <td class="webname">
+                后台管理系统
+            </td>
+            <td>
+                <div style="float:right;margin:0 3em;">
+                    欢迎您， <span th:text="${AdminName}"></span>
+                    <span style="margin:0 1em" onclick="com.updatePwd()">
+                            <i class="fa fa-edit "></i> 修改密码
+                        </span>
+                    <span onclick="com.signOut()"><i class="fa fa-sign-out"></i> 退出</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div region="south" border="false"
+     style="height:30px;background:#222d32;color:#b8c7ce;border-top:1px solid #dd4b39;text-align: center;line-height: 29px;">
+    ALL RIGHT RESERVED &copy; 版权所有 2018-2019
+</div>
+
+<div id="west" region="west" split="true" collapsible="false" border="false" title="功能菜单" style="width:220px;">
+    <div id="mAccordion" class="easyui-accordion" border="false" fit="true">
+
+    </div>
+</div>
+
+<div region="center" border="false">
+    <div id="mTab" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+        <div title="首页" style="padding:10px">
+            <iframe src="/admin/homeData" frameborder="0" scrolling="no" style="width:100%;height:99%"></iframe>
+        </div>
+    </div>
+</div>
+
+<!--修改密码弹窗-->
+<div id="dlg_update_pwd" class="easyui-dialog" title="修改登录密码" style="width:320px;height:250px;padding:10px"
+     buttons="#dlg_update_pwd_buttons" closed="true" modal="true" shadom="false" href="/admin/UpdatePwd">
+</div>
+<div id="dlg_update_pwd_buttons">
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="form.submit('#frm_updatePwd')">确定</a>
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="dlg.close('#dlg_update_pwd')">取消</a>
+</div>
+
+<script src="/easyui/jquery.min.js"></script>
+<script src="/easyui/jquery.easyui.min.js"></script>
+<script src="/easyui/local/easyui-lang-zh_CN.js"></script>
+<script src="/js/layer/layer.js"></script>
+<script src="/js/base.js"></script>
+<script type="text/javascript">
+    $(function () {
+        GetModuleAll();
+    })
+
+    function GetModuleAll() {
+        $.ajax({
+            url: "/admin/home/GetModule",
+            type: "get",
+            dataType: "json",
+            data: {
+                ParentID: 0
+            },
+            success: function (res) {
+                var flag = true;
+                $.each(res, function (index, val) {//加载父类节点即一级菜单
+                    var html = '<div><ul class="easyui-tree" name="ul_' + val.name + '" id="tree_' + val.name + '" data-id="' + val.id + '" ></ul></div>';
+                    $('#mAccordion').accordion('add', {
+                        title: val.name,
+                        iconCls: val.icon,
+                        selected: flag,
+                        content: html,
+                    });
+                    tabSelect();
+                    flag = false;
+                });
+            }
+        })
+    }
+
+    function tabSelect() {
+        $('#mAccordion').accordion({
+            onSelect: function (title, index) {
+                var parentId = $("ul[name='ul_" + title + "']").attr("data-id");
+                $.ajax({
+                    url: "/admin/home/GetModule",
+                    type: "get",
+                    dataType: "json",
+                    data: {
+                        parentId: parentId
+                    },
+                    success: function (res) {
+                        var dataJson = [];
+                        $.each(res, function (index, m) {
+                            var j = {};
+                            j.text = m.name;
+                            j.attributes = {};
+                            j.attributes.url = m.linkUrl;
+                            dataJson.push(j);
+                        })
+                        $("#tree_" + title).tree({
+                            data: dataJson,
+                            onClick: function (node) {
+                                addTab(node.text,node.attributes.url);
+                            }
+                        });
+                    }
+                })
+            }
+        });
+    }
+
+    function addTab(title, url){
+        if ($("#mTab").tabs("exists", title)) { //判断该Tab页是否已经存在
+            $("#mTab").tabs("select", title);
+        } else {
+            var content = '<iframe scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:100%;"></iframe>';
+            $('#mTab').tabs('add', {
+                title: title,
+                content: content,
+                closable: true
+            });
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.dingsheng.decent</groupId>
+    <artifactId>decent-core</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>decent-core</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <!--<spring-cloud.version>Finchley.RELEASE</spring-cloud.version>-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.build.jdk>1.8</project.build.jdk>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <plugin.maven-compiler>3.1</plugin.maven-compiler>
+        <plugin.maven.resources>2.6</plugin.maven.resources>
+        <skipTests>true</skipTests>
+        <!-- 集中定义依赖版本号 -->
+        <version.commons-io>2.6</version.commons-io>
+        <version.fastjson>1.2.47</version.fastjson>
+        <version.commons-beanutils>1.9.3</version.commons-beanutils>
+        <version.commons-collections>3.2.1</version.commons-collections>
+        <version.commons-logging>1.1.1</version.commons-logging>
+        <version.ezmorph>1.0.6</version.ezmorph>
+        <version.json-lib>2.2.3</version.json-lib>
+        <version.pagehelper>1.2.3</version.pagehelper>
+        <version.alioss>2.7.0</version.alioss>
+        <version.commons-httpclient>3.1</version.commons-httpclient>
+        <version.xstream>1.4.10</version.xstream>
+        <version.commons-lang3>3.7</version.commons-lang3>
+        <version.jackson>2.9.6</version.jackson>
+        <version.springboot>2.2.6.RELEASE</version.springboot>
+        <version.ehcache>2.10.3</version.ehcache>
+        <version.jedis>2.9.0</version.jedis>
+        <version.commons-pool2>2.5.0</version.commons-pool2>
+        <version.bouncycastle>1.46</version.bouncycastle>
+        <version.httpclient>4.5.5</version.httpclient>
+        <version.spring>5.0.7.RELEASE</version.spring>
+        <version.httpcore>4.4.9</version.httpcore>
+        <version.commons-codec>1.11</version.commons-codec>
+        <version.druid-spring-boot>1.1.9</version.druid-spring-boot>
+        <version.mybatis.springboot>1.3.2</version.mybatis.springboot>
+        <version.mysql>5.1.46</version.mysql>
+        <version.poi-ooxml>3.9</version.poi-ooxml>
+        <version.swagger>1.8.0.RELEASE</version.swagger>
+        <version.lombok>1.16.18</version.lombok>
+        <version.mail>1.4.7</version.mail>
+        <version.gson>2.6.2</version.gson>
+        <version.jjwt>0.6.0</version.jjwt>
+        <kaptcha.version>2.3.2</kaptcha.version>
+        <tk.mybatis.version>1.1.4</tk.mybatis.version>
+        <jwt.version>3.8.1</jwt.version>
+    </properties>
+
+    <dependencies>
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.cloud</groupId>-->
+        <!--<artifactId>spring-cloud-dependencies</artifactId>-->
+        <!--<version>${spring-cloud.version}</version>-->
+        <!--<type>pom</type>-->
+        <!--<scope>import</scope>-->
+        <!--</dependency>-->
+
+        <!-- spring boot 相关组件 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <version>${version.springboot}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${version.springboot}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${version.mybatis.springboot}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <version>${version.springboot}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-devtools</artifactId>-->
+        <!--<version>${version.springboot}</version>-->
+        <!--<scope>runtime</scope>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${version.springboot}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!-- Apache工具组件 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${version.commons-lang3}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${version.commons-io}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>${version.commons-beanutils}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${version.commons-collections}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>${version.commons-logging}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${version.commons-codec}</version>
+        </dependency>
+
+
+        <!-- Jackson Json处理工具包 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${version.jackson}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${version.jackson}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+            <version>${version.jackson}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+            <version>${version.jackson}</version>
+        </dependency>
+
+        <!-- 将作为Redis对象序列化器 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${version.fastjson}</version>
+        </dependency>
+
+
+        <!--<dependency>-->
+        <!--<groupId>net.sf.ezmorph</groupId>-->
+        <!--<artifactId>ezmorph</artifactId>-->
+        <!--<version>${version.ezmorph}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>net.sf.json-lib</groupId>-->
+        <!--<artifactId>json-lib</artifactId>-->
+        <!--<version>${version.json-lib}</version>-->
+        <!--<classifier>jdk15</classifier>&lt;!&ndash; jdk版本 &ndash;&gt;-->
+        <!--</dependency>-->
+
+        <!-- mysql （JDBC驱动) -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${version.mysql}</version>
+        </dependency>
+
+        <!-- 添加jedis客户端 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${version.jedis}</version>
+        </dependency>
+        <!--spring2.0集成redis所需common-pool2-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>${version.commons-pool2}</version>
+        </dependency>
+
+        <!--mapper-->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>${tk.mybatis.version}</version>
+        </dependency>
+
+        <!-- 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${version.pagehelper}</version>
+            <!--<version>1.2.3</version>-->
+        </dependency>
+
+        <!--mapper-->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>1.1.4</version>
+        </dependency>
+
+        <!-- spring AOP -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${version.spring}</version>
+        </dependency>
+
+        <!-- alibaba的druid数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${version.druid-spring-boot}</version>
+        </dependency>
+
+        <!-- swagger 文档依赖 -->
+        <dependency>
+            <groupId>com.spring4all</groupId>
+            <artifactId>swagger-spring-boot-starter</artifactId>
+            <version>${version.swagger}</version>
+            <!--<version>1.8.0.RELEASE</version>-->
+        </dependency>
+
+
+        <!-- HTTP和相关协议组件 -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>${version.httpcore}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${version.httpclient}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>${version.commons-httpclient}</version>
+        </dependency>
+        <!-- 实现AES256加密解密所需jar -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk16</artifactId>
+            <version>${version.bouncycastle}</version>
+        </dependency>
+        <!-- aliyun.oss -->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>${version.alioss}</version>
+        </dependency>
+        <!-- XML文件序列化框架 -->
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>${version.xstream}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${version.poi-ooxml}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${version.lombok}</version>
+            <!--<version>1.16.18</version>-->
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>${version.mail}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${version.gson}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${version.jjwt}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>${kaptcha.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.5.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

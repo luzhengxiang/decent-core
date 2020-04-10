@@ -1,0 +1,83 @@
+<style type="text/css">
+    .linebr {
+        clear: both; /* 清除左右浮动 */
+        width: 60%; /* 必须定义宽度 */
+        word-break: break-word; /* 文本行的任意字内断开 */
+        word-wrap: break-word; /* IE */
+        white-space: -moz-pre-wrap; /* Mozilla */
+        white-space: -hp-pre-wrap; /* HP printers */
+        white-space: -o-pre-wrap; /* Opera 7 */
+        white-space: -pre-wrap; /* Opera 4-6 */
+        white-space: pre; /* CSS2 */
+        white-space: pre-wrap; /* CSS 2.1 */
+        white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+    }
+
+    .msgDiv {
+        width: 100%;
+        float: left;
+        margin-bottom: 15px;
+    }
+
+    .msglabel {
+        margin-right: 20px;
+        padding-right: 8px;
+        padding-left: 8px;
+        background: #b5f6ea;
+        border-radius: 8px;
+    }
+
+</style>
+<form id="frm" style="height: 420px;overflow:auto" action="/admin/User/MsgReply" method="post" enctype="multipart/form-data"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+    <input type="hidden" id="MsgID" name="ID" th:value="${ID}"/>
+    <div id="UserMessage">
+
+    </div>
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">回复信息：</label>
+        <input class="easyui-textbox" name="Message" data-options="multiline:true" style="height:100px;width: 90%"
+               value=""/>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            url: "/admin/User/AdminUserMsgList",
+            type: "Post",
+            data: {
+                ID: $("#MsgID").val()
+            },
+            success: function (dat) {
+                if (dat != null) {
+                    var html = "";
+                    for (var i = 0; i < dat.length; i++) {
+                        if (dat[i].MsgType == 0) {
+                            if (dat[i].IsText == 1){
+                                html += '<div class="msgDiv">' +
+                                    '<label style="float: left;">用户留言：</label>' +
+                                    '<label style="float: right;">' + dat[i].AddTime + '</label>' +
+                                    '<div class="linebr msglabel">' + dat[i].Content + '</div>' +
+                                    '</div>';
+                            }else if (dat[i].IsText == 2){
+                                html += '<div class="msgDiv">' +
+                                    '<label style="float: left;">用户留言：</label>' +
+                                    '<label style="float: right;">' + dat[i].AddTime + '</label>' +
+                                    '<div class="linebr msglabel"><img src="' + dat[i].Content + '" style="width:150px;height: 100px;" /></div>' +
+                                    '</div>';
+                            }
+                        } else {
+                            html += '<div class="msgDiv">' +
+                                '<label style="float: left;">客服回复：</label>' +
+                                '<label style="float: right;">' + dat[i].AddTime + '</label>' +
+                                '<div class="linebr msglabel" >' + dat[i].Content + '</div>' +
+                                '</div>';
+                        }
+                    }
+                    $("#UserMessage").html(html);
+                    $("#frm").scrollTop($("#frm")[0].scrollHeight);
+                }
+            }
+        })
+    })
+</script>

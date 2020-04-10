@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理系统 </title>
+    <link href="/easyui/easyui.css" rel="stylesheet"/>
+    <link href="/easyui/icon.css" rel="stylesheet"/>
+    <link href="/easyui/skin-red.css" rel="stylesheet"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script src="/easyui/jquery.min.js"></script>
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    <script src="/easyui/local/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<div id="toolbar">
+    <div class="search-wapper">
+        <form class="query">
+            <span>奖品名称</span>
+            <input id="query_name" class="easyui-textbox"/>
+
+            <span>用户名</span>
+            <input id="query_userName" class="easyui-textbox"/>
+
+            <span>中奖类型</span>
+            <select id="query_type" class="easyui-combobox" style="width:140px;">
+                <option value="-1">全部</option>
+                <option value="0">未中奖</option>
+                <option value="1">中奖</option>
+            </select>
+
+            <span>中奖状态</span>
+            <select id="query_status" class="easyui-combobox" style="width:140px;">
+                <option value="-1">全部</option>
+                <option value="0">未中奖</option>
+                <option value="1">未处理</option>
+                <option value="2">已处理</option>
+            </select>
+            <input class="btn-search" type="button" value="查询" onclick="dg.query('#dg_data',['name','userName','type,1','status,1'])"/>
+        </form>
+    </div>
+    <div class="action-wapper">
+        <a href="javascript:;" onclick="dg.del('#dg_data', '/admin/Prize/processed','是否设该记录为已处理？确认收无法撤销！')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-edit"></i>已处理</a>
+    </div>
+</div>
+<table id="dg_data" toolbar="#toolbar" class="easyui-datagrid" fit="true" url="/admin/Prize/prizeRecordList"
+       pagination="true" emptyMsg="暂无数据" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="ck" checkbox="true"></th>
+        <th field="id" width="50">ID</th>
+        <th field="userName" width="120">用户名</th>
+        <th field="consume" width="120">抽奖消耗</th>
+        <th field="name" width="120">奖品名称</th>
+        <th field="type" formatter="formatter.prizeRecordType"  width="120">类型</th>
+        <th field="status" formatter="formatter.prizeRecordStatus"  width="120">状态</th>
+        <th field="addTime" formatter="formatter.time2"  width="140">抽奖时间</th>
+
+    </tr>
+    </thead>
+</table>
+<!--新增弹框-->
+<div id="dlg" class="easyui-dialog" title="奖品管理" style="width:400px;height:500px;padding:10px" buttons="#frmTb"
+     closed="true" modal="true" shadow="false">
+</div>
+<div id="frmTb">
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="form.submit('#frm', '#dlg', '#dg_data')">确定</a>
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="dlg.close('#dlg')">取消</a>
+</div>
+<script src="/js/layer/layer.js"></script>
+<script src="/js/base.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理系统 </title>
+    <link href="/easyui/easyui.css" rel="stylesheet"/>
+    <link href="/easyui/icon.css" rel="stylesheet"/>
+    <link href="/easyui/skin-red.css" rel="stylesheet"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script src="/easyui/jquery.min.js"></script>
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    <script src="/easyui/local/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<div id="toolbar">
+    <div class="search-wapper">
+        <form class="query">
+            <span>用户名</span>
+            <input id="query_name" class="easyui-textbox"/>
+
+            <span>宠物类型</span>
+            <select id="query_productId" class="easyui-combobox" style="width:140px;">
+                <option value="-1">全部</option>
+                <option value="4">发财兔</option>
+                <option value="5">幸运兔</option>
+                <option value="6">日月兔</option>
+                <option value="7">星辰兔</option>
+                <option value="8">玉兔</option>
+                <option value="9">云兔</option>
+                <!--<option value="7">巧米兔</option>-->
+                <!--<option value="8">巧米兔</option>-->
+                <!--<option value="9">弥沙兔</option>-->
+            </select>
+
+            <span>状态</span>
+            <select id="query_status" class="easyui-combobox" style="width:100px;">
+                <option value="-1">全部</option>
+                <option value="0">预约中</option>
+                <option value="1">预约成功</option>
+                <option value="2">预约失败</option>
+            </select>
+            <input class="btn-search" type="button" value="查询" onclick="dg.query('#dg_data',['name','status,1','productId,1'])"/>
+        </form>
+    </div>
+    <div class="action-wapper">
+
+        <!--<a href="javascript:;" onclick="dg.edit('#dg_data', '#dlg', '/admin/ManualBuyMatch')"-->
+           <!--class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-edit"></i> 指定匹配 </a>-->
+
+    </div>
+</div>
+<table id="dg_data" toolbar="#toolbar" class="easyui-datagrid" fit="true" url="/admin/userHangMatch/UserHangBuyList"
+       pagination="true" emptyMsg="暂无数据" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="ck" checkbox="true"></th>
+        <th field="id" width="60">ID</th>
+        <th field="state" formatter="formatter.HangBuyStatus" width="100">预约状态</th>
+        <th field="userName" width="100">用户名</th>
+        <th field="productName"  width="135">宠物名称</th>
+        <th field="bookingConsume"  width="135">预约消耗</th>
+        <th field="receiveTime" formatter="formatter.time2"  width="150">领取时间</th>
+        <th field="addTime" formatter="formatter.time2" width="150">预约时间</th>
+    </tr>
+    </thead>
+</table>
+
+<!--收款信息-->
+<div id="dlg" class="easyui-dialog" title="手动匹配" style="width:450px;height:320px;padding:10px" buttons="#frmTb"
+     closed="true" modal="true" shadow="false">
+</div>
+
+<div id="frmTb">
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="form.submit('#frm', '#dlg', '#dg_data')">确定</a>
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="dlg.close('#dlg')">取消</a>
+</div>
+
+<script src="/js/layer/layer.js"></script>
+<script src="/js/base.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingsheng.decent.mapper.SysAdminMapper">
+  <resultMap id="BaseResultMap" type="com.dingsheng.decent.entity.SysAdmin">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="locking" jdbcType="INTEGER" property="locking" />
+    <result column="login_pwd" jdbcType="VARCHAR" property="loginPwd" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, add_time, locking, login_pwd, nick_name, permission, user_name
+  </sql>
+
+
+    <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_admin
+    where user_name = #{userName}
+    </select>
+
+
+    <update id="updatePwd">
+    update
+      sys_admin
+    set
+      login_pwd = #{pwd}
+    where
+      id = #{ID,jdbcType=INTEGER}
+    </update>
+
+
+
+
+  <!--<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from sys_admin-->
+    <!--where id = #{ID,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">-->
+    <!--delete from sys_admin-->
+    <!--where id = #{ID,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<insert id="insert" keyColumn="id" keyProperty="ID" parameterType="com.dingsheng.decent.entity.SysAdmin" useGeneratedKeys="true">-->
+    <!--insert into sys_admin (add_time, locking, login_pwd, -->
+      <!--nick_name, permission, user_name-->
+      <!--)-->
+    <!--values (#{AddTime,jdbcType=TIMESTAMP}, #{locking,jdbcType=INTEGER}, #{loginPwd,jdbcType=VARCHAR}, -->
+      <!--#{nickName,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}-->
+      <!--)-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" keyColumn="id" keyProperty="ID" parameterType="com.dingsheng.decent.entity.SysAdmin" useGeneratedKeys="true">-->
+    <!--insert into sys_admin-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
+      <!--<if test="AddTime != null">-->
+        <!--add_time,-->
+      <!--</if>-->
+      <!--<if test="locking != null">-->
+        <!--locking,-->
+      <!--</if>-->
+      <!--<if test="loginPwd != null">-->
+        <!--login_pwd,-->
+      <!--</if>-->
+      <!--<if test="nickName != null">-->
+        <!--nick_name,-->
+      <!--</if>-->
+      <!--<if test="permission != null">-->
+        <!--permission,-->
+      <!--</if>-->
+      <!--<if test="userName != null">-->
+        <!--user_name,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides=",">-->
+      <!--<if test="AddTime != null">-->
+        <!--#{AddTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="locking != null">-->
+        <!--#{locking,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="loginPwd != null">-->
+        <!--#{loginPwd,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="nickName != null">-->
+        <!--#{nickName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="permission != null">-->
+        <!--#{permission,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="userName != null">-->
+        <!--#{userName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.dingsheng.decent.entity.SysAdmin">-->
+    <!--update sys_admin-->
+    <!--<set>-->
+      <!--<if test="AddTime != null">-->
+        <!--add_time = #{AddTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="locking != null">-->
+        <!--locking = #{locking,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="loginPwd != null">-->
+        <!--login_pwd = #{loginPwd,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="nickName != null">-->
+        <!--nick_name = #{nickName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="permission != null">-->
+        <!--permission = #{permission,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="userName != null">-->
+        <!--user_name = #{userName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{ID,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.dingsheng.decent.entity.SysAdmin">-->
+    <!--update sys_admin-->
+    <!--set add_time = #{AddTime,jdbcType=TIMESTAMP},-->
+      <!--locking = #{locking,jdbcType=INTEGER},-->
+      <!--login_pwd = #{loginPwd,jdbcType=VARCHAR},-->
+      <!--nick_name = #{nickName,jdbcType=VARCHAR},-->
+      <!--permission = #{permission,jdbcType=VARCHAR},-->
+      <!--user_name = #{userName,jdbcType=VARCHAR}-->
+    <!--where id = #{ID,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

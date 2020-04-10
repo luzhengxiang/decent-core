@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理系统 </title>
+    <link href="/easyui/easyui.css" rel="stylesheet"/>
+    <link href="/easyui/icon.css" rel="stylesheet"/>
+    <link href="/easyui/skin-red.css" rel="stylesheet"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script src="/easyui/jquery.min.js"></script>
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    <script src="/easyui/local/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<div id="toolbar">
+    <div class="search-wapper">
+        <form class="query">
+            <span>宠物名称</span>
+            <input id="query_name" class="easyui-textbox"/>
+            <input class="btn-search" type="button" value="查询" onclick="dg.query('#dg_data',['name'])"/>
+        </form>
+    </div>
+    <div class="action-wapper">
+        <a href="javascript:;" onclick="dg.edit('#dg_data', '#dlg', '/admin/ProductEdit')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-edit"></i> 编辑</a>
+    </div>
+</div>
+<table id="dg_data" toolbar="#toolbar" class="easyui-datagrid" fit="true" url="/admin/Product/list"
+       pagination="true" emptyMsg="暂无数据" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="ck" checkbox="true"></th>
+        <th field="name" width="135">宠物名称</th>
+        <th field="image" formatter="formatter.img2" width="120">宠物图片</th>
+        <th field="bookingConsume" width="120">预约消耗</th>
+        <th field="exchangeAmount" width="80">兑换金额</th>
+        <th field="amount" width="80">金额</th>
+        <th field="maxAmount" width="80">最大金额</th>
+        <th field="durationCount" width="80">宠物周期</th>
+        <th field="profit" width="80">合约收益</th>
+        <th field="upgradeProductName" width="80">升级宠物</th>
+        <th field="isOpen"  formatter="formatter.isOpen"  width="80">开放兑换</th>
+        <th field="matchSuccessRate" width="80">匹配成功率</th>
+        <th field="matchTime" width="80">匹配时间</th>
+        <th field="addTime" formatter="formatter.time2"  width="150">创建时间</th>
+    </tr>
+    </thead>
+</table>
+<!--新增弹框-->
+<div id="dlg" class="easyui-dialog" title="宠物管理" style="width:400px;height:620px;padding:10px" buttons="#frmTb"
+     closed="true" modal="true" shadow="false">
+</div>
+<div id="frmTb">
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="form.submit('#frm', '#dlg', '#dg_data')">确定</a>
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="dlg.close('#dlg')">取消</a>
+</div>
+<script src="/js/layer/layer.js"></script>
+<script src="/js/base.js"></script>
+</body>
+</html>

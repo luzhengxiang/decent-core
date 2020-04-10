@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingsheng.decent.mapper.MemberMapper">
+    <resultMap id="BaseResultMap" type="com.dingsheng.decent.entity.Member">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="idcard" jdbcType="VARCHAR" property="idcard"/>
+        <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="marital_Status" jdbcType="INTEGER" property="maritalStatus"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="district" jdbcType="VARCHAR" property="district"/>
+        <result column="educate" jdbcType="VARCHAR" property="educate"/>
+        <result column="industry" jdbcType="VARCHAR" property="industry"/>
+        <result column="occupation" jdbcType="VARCHAR" property="occupation"/>
+        <result column="earning" jdbcType="VARCHAR" property="earning"/>
+        <result column="pwd" jdbcType="VARCHAR" property="pwd"/>
+        <result column="pay_pwd" jdbcType="VARCHAR" property="payPwd"/>
+        <result column="drawPwd" jdbcType="VARCHAR" property="drawpwd"/>
+        <result column="validated" jdbcType="TINYINT" property="validated"/>
+        <result column="regDate" jdbcType="TIMESTAMP" property="regdate"/>
+        <result column="trackId" jdbcType="VARCHAR" property="trackid"/>
+        <result column="loginTime" jdbcType="TIMESTAMP" property="logintime"/>
+        <result column="utm_content" jdbcType="VARCHAR" property="utmContent"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="headerImg" jdbcType="VARCHAR" property="headerimg"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="update_Time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="reg_source" jdbcType="INTEGER" property="regSource"/>
+        <result column="terminal_id" jdbcType="VARCHAR" property="terminalId"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="locking" jdbcType="INTEGER" property="locking"/>
+        <result column="lock_time" jdbcType="INTEGER" property="lockTime"/>
+        <result column="referral_Code" jdbcType="VARCHAR" property="referralCode"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, user_name, real_name, idcard, telephone, email, marital_Status, province, city,
+    district, educate, industry, occupation, earning, pwd, pay_pwd, drawPwd, validated, regDate,
+    trackId, loginTime, utm_content, `status`, headerImg, `level`, update_Time, reg_source,
+    terminal_id, remark, locking, lock_time, referral_Code
+  </sql>
+
+    <select id="selectByReferralCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from u_user_member
+        where referral_Code = #{referralCode}
+    </select>
+
+
+    <select id="MySecondLowerByReferralCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from u_user_member
+        where referral_Code in (
+        select trackId from u_user_member
+        where referral_Code = 1)
+    </select>
+
+
+    <update id="modifyPwd">
+        update
+          u_user_member
+        set
+          pwd = #{password}
+        where
+         telephone = #{telephone}
+    </update>
+
+</mapper>

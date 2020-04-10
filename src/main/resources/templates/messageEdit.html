@@ -1,0 +1,36 @@
+<form id="frm" action="/admin/message/edit" method="post" enctype="multipart/form-data"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+    <input type="hidden" name="id" th:value="${id}"/>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">消息类型：</label>
+        <input class="easyui-combobox" name="msgType" style="width:120px"
+               label="" valueField="ID" textField="Name" url="/admin/message/GeMessageList" th:value="${msgType}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" name="title" style="width:80%" label="标题" required th:value="${title}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label>内容</label>
+        <script id="editor" name="editor" type="text/plain"></script>
+    </div>
+    <input style="display: none;width:100%" id="ContentValue" th:value="${content}"/>
+
+</form>
+
+<link href="/umeditor/themes/default/css/umeditor.css" rel="stylesheet"/>
+<script src="/umeditor/umeditor.config.js"></script>
+<script src="/umeditor/umeditor.js"></script>
+<script src="/umeditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+    $(function () {
+        setTimeout(function () {
+            var ue = UM.getEditor('editor');
+            var DetailsValue = $("#ContentValue").val();
+            console.log(DetailsValue);
+            ue.setContent(DetailsValue);
+        }, 100);
+    });
+</script>

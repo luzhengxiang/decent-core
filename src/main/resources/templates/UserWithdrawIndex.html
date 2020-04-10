@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理系统 </title>
+    <link href="/easyui/easyui.css" rel="stylesheet"/>
+    <link href="/easyui/icon.css" rel="stylesheet"/>
+    <link href="/easyui/skin-red.css" rel="stylesheet"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script src="/easyui/jquery.min.js"></script>
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    <script src="/easyui/local/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<div id="toolbar">
+    <div class="search-wapper">
+        <form class="query">
+            <span>用户名</span>
+            <input id="query_name" class="easyui-textbox"/>
+
+            <span>类型</span>
+            <select id="query_type" class="easyui-combobox" style="width:80px;">
+                <option value="-1">全部</option>
+                <option value="0">人工充值</option>
+                <option value="1">在线充值</option>
+            </select>
+
+            <span>状态</span>
+            <select id="query_status" class="easyui-combobox" style="width:80px;">
+                <option value="-1">全部</option>
+                <option value="0">提现中</option>
+                <option value="1">已完成</option>
+                <option value="2">已驳回</option>
+            </select>
+            <input class="btn-search" type="button" value="查询" onclick="dg.query('#dg_data',['name','type,1','status,1'])"/>
+        </form>
+    </div>
+    <div class="action-wapper">
+        <a href="javascript:;" onclick="dg.del('#dg_data', '/admin/User/WithdrawAudit?Status=1','通过后无法更改,是否通过提现？')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-check"></i> 完成</a>
+        <a href="javascript:;" onclick="dg.del('#dg_data', '/admin/User/WithdrawAudit?Status=2','驳回后无法更改,是否驳回提现？')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-close"></i> 驳回</a>
+    </div>
+</div>
+<table id="dg_data" toolbar="#toolbar" class="easyui-datagrid" fit="true" url="/admin/User/WithdrawList"
+       pagination="true" emptyMsg="暂无数据" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="ck" checkbox="true"></th>
+        <th field="id" width="100">ID</th>
+        <th field="type" formatter="formatter.userWithdrawType" width="80">提现类型</th>
+        <th field="status" formatter="formatter.userWithdrawalStatus" width="100">提现状态</th>
+        <th field="userName" width="100">用户名</th>
+        <th field="amount"width="100">提现数量</th>
+        <th field="serviceCharge" width="100">手续费</th>
+        <th field="walletAddress" width="180">钱包地址</th>
+        <th field="addTime" formatter="formatter.time2" width="150">添加时间</th>
+    </tr>
+    </thead>
+</table>
+<!--收款信息-->
+<div id="dlg" class="easyui-dialog" title="收款信息" style="width:550px;height:520px;padding:10px" buttons="#frmTb"
+     closed="true" modal="true" shadow="false">
+</div>
+<div id="frmTb">
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="dlg.close('#dlg')">关闭</a>
+</div>
+<script src="/js/layer/layer.js"></script>
+<script src="/js/base.js"></script>
+</body>
+</html>

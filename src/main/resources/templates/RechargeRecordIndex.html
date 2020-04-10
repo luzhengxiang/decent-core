@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理系统 </title>
+    <link href="/easyui/easyui.css" rel="stylesheet"/>
+    <link href="/easyui/icon.css" rel="stylesheet"/>
+    <link href="/easyui/skin-red.css" rel="stylesheet"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script src="/easyui/jquery.min.js"></script>
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    <script src="/easyui/local/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<div id="toolbar">
+    <div class="search-wapper">
+        <form class="query">
+            <span>用户名</span>
+            <input id="query_name" class="easyui-textbox"/>
+            <span>状态</span>
+            <select id="query_status" class="easyui-combobox" style="width:100px;">
+                <option value="-1">全部</option>
+                <option value="0">待处理</option>
+                <option value="1">已完成</option>
+                <option value="2">已驳回</option>
+            </select>
+            <input class="btn-search" type="button" value="查询" onclick="dg.query('#dg_data',['name','status,1'])"/>
+        </form>
+    </div>
+    <div class="action-wapper">
+        <a href="javascript:;" onclick="dg.del('#dg_data', '/admin/user/RechargeStatus?status=1','是否完成该订单？')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-check"></i> 完成</a>
+        <a href="javascript:;" onclick="dg.del('#dg_data', '/admin/user/RechargeStatus?status=2','是否驳回该订单？')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-close"></i> 驳回</a>
+    </div>
+</div>
+<table id="dg_data" toolbar="#toolbar" class="easyui-datagrid" fit="true" url="/admin/user/AdminRechargeList"
+       pagination="true" emptyMsg="暂无数据" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="ck" checkbox="true"></th>
+        <th field="userName" width="120">用户名</th>
+        <th field="txid" width="120">txid</th>
+        <th field="amount" width="80">金额</th>
+        <th field="status" width="80">审批状态</th>
+        <th field="addTime" formatter="formatter.time2" width="150">添加时间</th>
+    </tr>
+    </thead>
+</table>
+<script src="/js/layer/layer.js"></script>
+<script src="/js/base.js"></script>
+</body>
+</html>

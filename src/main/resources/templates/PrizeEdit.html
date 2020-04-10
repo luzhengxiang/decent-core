@@ -1,0 +1,44 @@
+<form style="text-align: center" id="frm" action="/admin/Prize/Edit" method="post" enctype="multipart/form-data"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+    <input type="hidden" name="id" th:value="${id}"/>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">奖品名称：</label>
+        <input class="easyui-textbox" name="name" style="width:193px" label="" required th:value="${name}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">积分奖励：</label>
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true,precision:2"
+               name="rewardIntegral" style="width:193px" label="" required th:value="${rewardIntegral}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">中奖概率：</label>
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true,precision:2"
+               name="probability" style="width:193px" label="" required th:value="${probability}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">位&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp置：</label>
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true"
+               name="position" style="width:193px" label="" required th:value="${position}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">奖品类型：</label>
+          <input class="easyui-combobox" name="type" style="width:193px"
+                 label="" valueField="ID" textField="Name" url="/admin/Prize/GePrizeList" th:value="${type}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label>奖品图片：</label>
+        <img th:src="${image}" style="width:60px;margin-left:20px"/>
+        <label>如需修改，请在下方上传</label>
+    </div>
+    <div style="margin-bottom:20px">
+        <input type="hidden" name="image" th:value="${image}"/>
+        <input class="easyui-filebox" name="newImg" prompt="奖品图片" style="width:76%" buttonText="上传图片"/>
+    </div>
+
+</form>

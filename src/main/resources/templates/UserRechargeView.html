@@ -1,0 +1,55 @@
+<form id="frm" action="/admin/User/recharge" method="post" enctype="multipart/form-data"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+    <input type="hidden" name="id" th:value="${id}"/>
+
+    <div style="margin-bottom:10px">
+        <input class="easyui-textbox" name="userName" style="width:95%"
+               label="用户名" required th:value="${userName}" readonly="readonly" />
+    </div>
+
+    <div style="margin-bottom:10px">
+        <input class="easyui-textbox" style="width:95%"
+               label="胡萝卜" required th:value="${amount}" readonly="readonly" />
+    </div>
+
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" style="width:95%"
+               label="积分余额" required th:value="${integral}" readonly="readonly" />
+    </div>
+
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" style="width:95%"
+               label="信誉分" required th:value="${creditScore}" readonly="readonly" />
+    </div>
+
+
+    <div style="margin-bottom:10px">
+        <input class="easyui-textbox" name="amount" style="width:95%"
+               label="充值胡萝卜" required th:value="0" />
+    </div>
+
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" name="deAmount" style="width:95%"
+               label="减扣胡萝卜" required th:value="0" />
+    </div>
+
+    <div style="margin-bottom:10px">
+        <input class="easyui-textbox" name="integral" style="width:95%"
+               label="充值积分" required th:value="0" />
+    </div>
+
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" name="deIntegral" style="width:95%"
+               label="减扣积分" required th:value="0" />
+    </div>
+
+    <div style="margin-bottom:10px">
+        <input class="easyui-textbox" name="creditScore" style="width:95%"
+               label="充值信誉分" required th:value="0" />
+    </div>
+
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" name="deCreditScore" style="width:95%"
+               label="减扣信誉分" required th:value="0" />
+    </div>
+</form>

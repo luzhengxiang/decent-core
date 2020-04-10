@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理系统 </title>
+    <link href="/easyui/easyui.css" rel="stylesheet"/>
+    <link href="/easyui/icon.css" rel="stylesheet"/>
+    <link href="/easyui/skin-red.css" rel="stylesheet"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script src="/easyui/jquery.min.js"></script>
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    <script src="/easyui/local/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<div id="toolbar">
+    <div class="search-wapper">
+        <form class="query">
+            <span>用户名</span>
+            <input id="query_name" class="easyui-textbox"/>
+            <span>记录类型</span>
+            <select id="query_recordType" class="easyui-combobox" style="width:120px;">
+                <option value="-1">全部</option>
+                <option value="1000">后台充值</option>
+                <option value="1001">后台减扣</option>
+                <option value="1002">实名赠送</option>
+                <option value="1003">兑换宠物</option>
+                <option value="1004">预约消耗</option>
+                <option value="1005">匹配过期</option>
+                <option value="1006">抽奖消耗</option>
+                <option value="1007">抽奖获得</option>
+                <option value="1008">宠物转让</option>
+                <option value="1009">合约收益</option>
+                <option value="1010">团队奖励</option>
+                <option value="1011">胡萝卜交易</option>
+                <option value="1012">申请解锁</option>
+
+            </select>
+
+            <span>账户类型</span>
+            <select id="query_accouontType" class="easyui-combobox" style="width:100px;">
+                <option value="-1">全部</option>
+                <option value="0">胡萝卜</option>
+                <option value="1">积分</option>
+                <option value="2">信誉分</option>
+                <option value="3">合约收益</option>
+            </select>
+
+            <span>收支类型</span>
+            <select id="query_recordStatus" class="easyui-combobox" style="width:100px;">
+                <option value="-1">全部</option>
+                <option value="1">收入</option>
+                <option value="0">支出</option>
+            </select>
+            <input class="btn-search" type="button" value="查询" onclick="dg.query('#dg_data',['name','recordType,1','accouontType,1','recordStatus,1'])"/>
+        </form>
+    </div>
+    <div class="action-wapper">
+    </div>
+</div>
+<table id="dg_data" toolbar="#toolbar" class="easyui-datagrid" fit="true" url="/admin/User/UserRecordList"
+       pagination="true" emptyMsg="暂无数据" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="ck" checkbox="true"></th>
+        <th field="userName" width="120">用户名</th>
+        <th field="amount" width="80">金额</th>
+        <th field="balance" width="80">账户余额</th>
+        <th field="recordType" formatter="formatter.RecordType" width="100">记录类型</th>
+        <th field="currencyType" formatter="formatter.PaymentType" width="80">账户类型</th>
+        <th field="recordStatus" formatter="formatter.RecordStatus" width="80">流水状态</th>
+        <th field="relevanceId" width="80">关联ID</th>
+        <th field="remark" width="350">备注</th>
+        <th field="addTime" formatter="formatter.time2" width="150">添加时间</th>
+    </tr>
+    </thead>
+</table>
+<!--收款信息-->
+<div id="dlg" class="easyui-dialog" title="收款信息" style="width:450px;height:320px;padding:10px" buttons="#frmTb"
+     closed="true" modal="true" shadow="false" href="/admin/UserReceiptInfo">
+</div>
+<div id="frmTb">
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="dlg.close('#dlg')">关闭</a>
+</div>
+<script src="/js/layer/layer.js"></script>
+<script src="/js/base.js"></script>
+</body>
+</html>

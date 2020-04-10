@@ -1,0 +1,26 @@
+<form id="frm" action="/admin/Module/Edit" method="post" enctype="multipart/form-data"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+    <input type="hidden" name="ID" th:value="${ID}"/>
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">上级菜单：</label>
+        <input class="easyui-combobox" name="ParentID" style="width:120px"
+               label="" valueField="ID" textField="Name" url="/admin/Module/GetModule" th:value="${ParentID}"/>
+    </div>
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">菜单名称：</label>
+        <input class="easyui-textbox" name="Name" style="width:150px" label="" required th:value="${Name}"/>
+    </div>
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">菜单图标：</label>
+        <input class="easyui-textbox" name="Icon" style="width:150px" label=""  th:value="${Icon}"/>
+    </div>
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">菜单链接：</label>
+        <input class="easyui-textbox" name="LinkUrl" style="width:150px" label=""  th:value="${LinkUrl}"/>
+    </div>
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">菜单排序：</label>
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true"
+               name="Sort" style="width:150px" label="" required th:value="${Sort}"/>
+    </div>
+</form>

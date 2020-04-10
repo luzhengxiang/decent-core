@@ -1,0 +1,22 @@
+<form id="frm" action="/admin/Admin/Edit" method="post" enctype="multipart/form-data"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+    <input type="hidden" name="id" th:value="${id}"/>
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" name="userName" style="width:150px" label="登录账号:" required
+               th:value="${userName}"/>
+    </div>
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" name="nickName" style="width:150px" label="昵称：" required th:value="${nickName}"/>
+    </div>
+    <div style="margin-bottom:20px;" th:if="${id==0}">
+        <input class="easyui-passwordbox" name="loginPwd" style="width:90%" label="用户密码：" value=""/>
+    </div>
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">权限管理：</label>
+        <div class="easyui-panel" style="padding:5px">
+            <ul id="tree" class="easyui-tree"
+                th:data-options="${URL}"></ul>
+        </div>
+        <input type="hidden" name="Permission" id="Permission" th:value="${permission}"/>
+    </div>
+</form>

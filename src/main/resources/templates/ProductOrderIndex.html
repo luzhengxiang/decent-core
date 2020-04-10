@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理系统 </title>
+    <link href="/easyui/easyui.css" rel="stylesheet"/>
+    <link href="/easyui/icon.css" rel="stylesheet"/>
+    <link href="/easyui/skin-red.css" rel="stylesheet"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script src="/easyui/jquery.min.js"></script>
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    <script src="/easyui/local/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<div id="toolbar">
+    <div class="search-wapper">
+        <form class="query">
+            <span>用户名</span>
+            <input id="query_userName" class="easyui-textbox"/>
+
+            <span>订单状态</span>
+            <select id="query_orderStatus" class="easyui-combobox" style="width:100px;">
+                <option value="-1">全部</option>
+                <option value="0">竞购中</option>
+                <option value="1">待转卖</option>
+                <option value="2">可转卖</option>
+                <option value="3">转卖中</option>
+                <option value="4">提货</option>
+                <option value="5">完成</option>
+            </select>
+            <input class="btn-search" type="button" value="查询" onclick="dg.query('#dg_data',['userName','orderStatus,1'])"/>
+
+        </form>
+    </div>
+    <div class="action-wapper">
+
+        <a href="javascript:;" onclick="dg.del('#dg_data', '/admin/productOrders/shipments','您确定订单发货吗？')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-edit"></i> 订单发货 </a>
+
+    </div>
+</div>
+<table id="dg_data" toolbar="#toolbar" class="easyui-datagrid" fit="true" url="/admin/productOrders/orderList"
+       pagination="true" emptyMsg="暂无数据" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="ck" checkbox="true"></th>
+        <th field="id" width="120">ID</th>
+        <th field="userName" width="120">用户名</th>
+        <th field="tradeNo" width="120">订单编号</th>
+        <th field="productName" width="120">商品名称</th>
+        <!--<th field="productImg" width="120">订单图片</th>-->
+        <th field="price" width="120">竞购价</th>
+        <th field="status" width="120">状态</th>
+        <th field="type" width="120">身份类型</th>
+        <th field="consignee" width="120">收货人</th>
+        <th field="phone" width="120">联系电话</th>
+        <th field="address" width="120">收货地址</th>
+        <th field="remark" width="120">备注</th>
+        <th field="addTime" formatter="formatter.time2" width="140">创建时间</th>
+
+    </tr>
+    </thead>
+</table>
+<!--新增商品-->
+<div id="dlg" class="easyui-dialog" title="订单管理" style="width:750px;height:520px;padding:10px" buttons="#frmTb"
+     closed="true" modal="true" shadow="false">
+</div>
+
+<div id="dlg2" class="easyui-dialog" title="订单管理" style="width:550px;height:320px;padding:10px" buttons="#frmTb2"
+     closed="true" modal="true" shadow="false" href="/merchant/productOrders/productOrderShipments">
+</div>
+<div id="frmTb2">
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="form.submit('#frm2', '#dlg2', '#dg_data')">确定</a>
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="dlg.close('#dlg2')">取消</a>
+</div>
+<script src="/js/layer/layer.js"></script>
+<script src="/js/base.js"></script>
+</body>
+</html>

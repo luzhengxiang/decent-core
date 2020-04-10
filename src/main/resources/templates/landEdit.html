@@ -1,0 +1,37 @@
+<form id="frm" action="/admin/land/edit" method="post" enctype="multipart/form-data"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+    <input type="hidden" name="id" th:value="${id}"/>
+
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" name="landTypeName" style="width:80%" label="土地名称" required th:value="${landTypeName}" readonly="readonly"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" name="landNo" style="width:80%" label="土地编号" required th:value="${landNo}" readonly="readonly"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">最低下限：</label>
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true,precision:2"
+               name="minAmount" style="width:150px" label="" required th:value="${minAmount}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">最高上限：</label>
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true,precision:2"
+               name="maxAmount" style="width:150px" label="" required th:value="${maxAmount}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">成&nbsp长&nbsp率&nbsp：</label>
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true,precision:2"
+               name="growRete" style="width:150px" label="" required th:value="${growRete}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">种植天数：</label>
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true,precision:0"
+               name="dayCount" style="width:150px" label="" required th:value="${dayCount}"/>
+    </div>
+
+</form>

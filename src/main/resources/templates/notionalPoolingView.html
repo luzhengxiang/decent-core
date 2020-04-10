@@ -1,0 +1,25 @@
+<form id="frm" action="/admin/User/notionalPooling" method="post" enctype="multipart/form-data"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+    <input type="hidden" name="id" th:value="${id}"/>
+
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" name="userName" style="width:95%"
+               label="用   户   名" required th:value="${userName}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox"style="width:95%"
+               label="代币余额" required th:value="${tokenMoney}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" style="width:95%"
+               label="用户地址" required th:value="${ETHAddress}" readonly="readonly" />
+    </div>
+
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" name="toAddress" style="width:95%"
+               label="转出地址" required />
+    </div>
+
+</form>

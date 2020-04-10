@@ -1,0 +1,26 @@
+<form id="frm" action="/admin/userHangMatch/ManualSellMatch" method="post" enctype="multipart/form-data"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+    <input type="hidden" name="sellId" th:value="${id}"/>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">预&nbsp&nbsp&nbsp&nbsp约&nbsp&nbsp&nbsp&nbspID&nbsp&nbsp：</label>
+        <input class="easyui-textbox" name="id" style="width:150px" label="" required th:value="${id}" readonly="readonly"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">宠&nbsp&nbsp物&nbsp&nbsp名&nbsp&nbsp称&nbsp：</label>
+        <input class="easyui-textbox" name="productName" style="width:150px" label="" required th:value="${productName}" readonly="readonly"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">用&nbsp&nbsp&nbsp&nbsp&nbsp户&nbsp&nbsp&nbsp&nbsp名&nbsp：</label>
+        <input class="easyui-textbox" name="userName" style="width:150px" label="" required th:value="${userName}" readonly="readonly"/>
+    </div>
+
+
+    <div style="margin-bottom:20px">
+        <label style="margin-right:20px">预约方用户名：</label>
+        <input class="easyui-textbox" name="buyUserName" style="width:150px" label="" required />
+    </div>
+
+</form>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingsheng.decent.mapper.SysModuleMapper">
+    <resultMap id="BaseResultMap" type="com.dingsheng.decent.entity.SysModule">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="link_url" jdbcType="VARCHAR" property="linkUrl"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="parentid" jdbcType="INTEGER" property="parentID"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+       id, add_time, icon, link_url, `name`, parentid, sort
+    </sql>
+
+    <select id="getModuleByParentId" parameterType="int" resultMap="BaseResultMap">
+        select
+          <include refid="Base_Column_List"/>
+        from
+          sys_module
+        where
+          parentid = #{parentId,jdbcType=INTEGER}
+    </select>
+
+    <select id="getCurrentUserPermissionByParentId" parameterType="int" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        sys_module
+        where
+        parentid = #{parentId,jdbcType=INTEGER}
+        and id in (${permission})
+        order by id;
+    </select>
+
+
+    <!--<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from sys_module-->
+    <!--where id = #{ID,jdbcType=INTEGER}-->
+    <!--</select>-->
+    <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">-->
+    <!--delete from sys_module-->
+    <!--where id = #{ID,jdbcType=INTEGER}-->
+    <!--</delete>-->
+    <!--<insert id="insert" keyColumn="id" keyProperty="ID" parameterType="com.dingsheng.decent.entity.SysModule" useGeneratedKeys="true">-->
+    <!--insert into sys_module (add_time, icon, link_url, -->
+    <!--`name`, parentid, sort-->
+    <!--)-->
+    <!--values (#{AddTime,jdbcType=TIMESTAMP}, #{Icon,jdbcType=VARCHAR}, #{LinkUrl,jdbcType=VARCHAR}, -->
+    <!--#{Name,jdbcType=VARCHAR}, #{ParentID,jdbcType=INTEGER}, #{Sort,jdbcType=INTEGER}-->
+    <!--)-->
+    <!--</insert>-->
+    <!--<insert id="insertSelective" keyColumn="id" keyProperty="ID" parameterType="com.dingsheng.decent.entity.SysModule" useGeneratedKeys="true">-->
+    <!--insert into sys_module-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
+    <!--<if test="AddTime != null">-->
+    <!--add_time,-->
+    <!--</if>-->
+    <!--<if test="Icon != null">-->
+    <!--icon,-->
+    <!--</if>-->
+    <!--<if test="LinkUrl != null">-->
+    <!--link_url,-->
+    <!--</if>-->
+    <!--<if test="Name != null">-->
+    <!--`name`,-->
+    <!--</if>-->
+    <!--<if test="ParentID != null">-->
+    <!--parentid,-->
+    <!--</if>-->
+    <!--<if test="Sort != null">-->
+    <!--sort,-->
+    <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides=",">-->
+    <!--<if test="AddTime != null">-->
+    <!--#{AddTime,jdbcType=TIMESTAMP},-->
+    <!--</if>-->
+    <!--<if test="Icon != null">-->
+    <!--#{Icon,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="LinkUrl != null">-->
+    <!--#{LinkUrl,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="Name != null">-->
+    <!--#{Name,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="ParentID != null">-->
+    <!--#{ParentID,jdbcType=INTEGER},-->
+    <!--</if>-->
+    <!--<if test="Sort != null">-->
+    <!--#{Sort,jdbcType=INTEGER},-->
+    <!--</if>-->
+    <!--</trim>-->
+    <!--</insert>-->
+    <!--<update id="updateByPrimaryKeySelective" parameterType="com.dingsheng.decent.entity.SysModule">-->
+    <!--update sys_module-->
+    <!--<set>-->
+    <!--<if test="AddTime != null">-->
+    <!--add_time = #{AddTime,jdbcType=TIMESTAMP},-->
+    <!--</if>-->
+    <!--<if test="Icon != null">-->
+    <!--icon = #{Icon,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="LinkUrl != null">-->
+    <!--link_url = #{LinkUrl,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="Name != null">-->
+    <!--`name` = #{Name,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="ParentID != null">-->
+    <!--parentid = #{ParentID,jdbcType=INTEGER},-->
+    <!--</if>-->
+    <!--<if test="Sort != null">-->
+    <!--sort = #{Sort,jdbcType=INTEGER},-->
+    <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{ID,jdbcType=INTEGER}-->
+    <!--</update>-->
+    <!--<update id="updateByPrimaryKey" parameterType="com.dingsheng.decent.entity.SysModule">-->
+    <!--update sys_module-->
+    <!--set add_time = #{AddTime,jdbcType=TIMESTAMP},-->
+    <!--icon = #{Icon,jdbcType=VARCHAR},-->
+    <!--link_url = #{LinkUrl,jdbcType=VARCHAR},-->
+    <!--`name` = #{Name,jdbcType=VARCHAR},-->
+    <!--parentid = #{ParentID,jdbcType=INTEGER},-->
+    <!--sort = #{Sort,jdbcType=INTEGER}-->
+    <!--where id = #{ID,jdbcType=INTEGER}-->
+    <!--</update>-->
+</mapper>

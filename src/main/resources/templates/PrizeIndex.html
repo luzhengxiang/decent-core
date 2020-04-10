@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理系统 </title>
+    <link href="/easyui/easyui.css" rel="stylesheet"/>
+    <link href="/easyui/icon.css" rel="stylesheet"/>
+    <link href="/easyui/skin-red.css" rel="stylesheet"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <script src="/easyui/jquery.min.js"></script>
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    <script src="/easyui/local/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<div id="toolbar">
+    <div class="search-wapper">
+        <form class="query">
+            <span>奖品名称</span>
+            <input id="query_name" class="easyui-textbox"/>
+
+            <span>奖品类型</span>
+            <select id="query_type" class="easyui-combobox" style="width:140px;">
+                <option value="-1">全部</option>
+                <option value="0">积分奖励</option>
+                <option value="1">谢谢惠顾</option>
+                <option value="2">自定义奖品</option>
+            </select>
+
+            <input class="btn-search" type="button" value="查询" onclick="dg.query('#dg_data',['name','type,1'])"/>
+        </form>
+    </div>
+    <div class="action-wapper">
+        <a href="javascript:;" onclick="dg.edit('#dg_data', '#dlg', '/admin/PrizeEdit')"
+           class="easyui-linkbutton" data-options="plain:true"><i class="fa fa-edit"></i> 编辑</a>
+    </div>
+</div>
+<table id="dg_data" toolbar="#toolbar" class="easyui-datagrid" fit="true" url="/admin/Prize/list"
+       pagination="true" emptyMsg="暂无数据" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="ck" checkbox="true"></th>
+        <th field="id" width="50">ID</th>
+        <th field="image" formatter="formatter.img2" width="120">奖品图片</th>
+        <th field="name" width="120">奖品名称</th>
+        <th field="type" formatter="formatter.prizeType" width="120">类型</th>
+        <th field="probability" width="100">概率</th>
+        <th field="rewardIntegral" width="100">积分奖励</th>
+        <th field="position" width="80">位置</th>
+    </tr>
+    </thead>
+</table>
+<!--新增弹框-->
+<div id="dlg" class="easyui-dialog" title="奖品管理" style="width:400px;height:500px;padding:10px" buttons="#frmTb"
+     closed="true" modal="true" shadow="false">
+</div>
+<div id="frmTb">
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="form.submit('#frm', '#dlg', '#dg_data')">确定</a>
+    <a href="javascript:;" class="easyui-linkbutton" style="height:32px;width:90px"
+       onclick="dlg.close('#dlg')">取消</a>
+</div>
+<script src="/js/layer/layer.js"></script>
+<script src="/js/base.js"></script>
+</body>
+</html>

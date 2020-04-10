@@ -1,0 +1,30 @@
+<form id="frm" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div style="margin-bottom:20px">
+        <label>用户编号：<span th:text="${userNo}"></span></label>
+    </div>
+    <div style="margin-bottom:20px">
+        <label>用&nbsp户&nbsp名&nbsp：<span th:text="${userName}"></span></label>
+    </div>
+    <div style="margin-bottom:20px">
+        <label>银行卡号：<span th:text="${bankNo}"></span></label>
+    </div>
+    <div style="margin-bottom:20px">
+        <label>开&nbsp户&nbsp行&nbsp：<span th:text="${openingBank}"></span></label>
+    </div>
+    <div style="margin-bottom:20px">
+        <label>收&nbsp款&nbsp人&nbsp：&nbsp<span th:text="${realName}"></span></label>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label>身&nbsp份&nbsp证&nbsp：<span th:text="${idCard}"></span></label>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <label>微信收款码&nbsp&nbsp：&nbsp</label>
+        <img th:src="${wecharQRCode}" style="width:60px;"/>
+    </div>
+    <div style="margin-bottom:20px">
+        <label>支付宝收款码：</label>
+        <img th:src="${alipayQRCode}" style="width:60px;"/>
+    </div>
+</form>

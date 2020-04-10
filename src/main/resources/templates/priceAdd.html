@@ -1,0 +1,13 @@
+<form id="frm" action="/admin/price/add" method="post" xmlns:th="http://www.w3.org/1999/xhtml">
+    <input type="hidden" name="id" th:value="${id}" />
+    <div style="margin-bottom:20px">
+
+        <input class="easyui-numberspinner" data-options="increment:1,min:0,required:true,precision:2"
+               name="nowPrice" style="width:100%" label="金额" required th:value="${nowPrice}"/>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <input class="easyui-datebox" name="startTime" style="width:100%" label="开始时间" th:value="${startTime}"  required />
+    </div>
+
+</form>
