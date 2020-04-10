@@ -38,7 +38,7 @@
         <version.commons-httpclient>3.1</version.commons-httpclient>
         <version.xstream>1.4.10</version.xstream>
         <version.commons-lang3>3.7</version.commons-lang3>
-        <version.jackson>2.9.6</version.jackson>
+        <version.jackson>2.10.3</version.jackson>
         <version.springboot>2.2.6.RELEASE</version.springboot>
         <version.ehcache>2.10.3</version.ehcache>
         <version.jedis>2.9.0</version.jedis>
