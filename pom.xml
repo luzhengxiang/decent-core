@@ -36,7 +36,7 @@
         <version.pagehelper>1.2.3</version.pagehelper>
         <version.alioss>2.7.0</version.alioss>
         <version.commons-httpclient>3.1</version.commons-httpclient>
-        <version.xstream>1.4.10</version.xstream>
+        <version.xstream>1.4.15</version.xstream>
         <version.commons-lang3>3.7</version.commons-lang3>
         <version.jackson>2.9.6</version.jackson>
         <version.springboot>2.2.6.RELEASE</version.springboot>
