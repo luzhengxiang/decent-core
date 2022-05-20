@@ -55,7 +55,7 @@
         <version.swagger>1.8.0.RELEASE</version.swagger>
         <version.lombok>1.16.18</version.lombok>
         <version.mail>1.4.7</version.mail>
-        <version.gson>2.6.2</version.gson>
+        <version.gson>2.8.9</version.gson>
         <version.jjwt>0.6.0</version.jjwt>
         <kaptcha.version>2.3.2</kaptcha.version>
         <tk.mybatis.version>1.1.4</tk.mybatis.version>
